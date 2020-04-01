@@ -10,6 +10,10 @@
 
 {% block title %} &ndash; {{ article.title|striptags|escape }}{% endblock %}
 
+{% if article.readtime %}
+<span><p style="text-align:right; color:#aaaaaa; ">&nbsp Estimated read time: {{article.readtime.minutes}} min.</p></span>
+{% endif %}
+
 {% block content %}
 <article class="single">
   <header>
