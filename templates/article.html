@@ -17,21 +17,23 @@
 {% block content %}
 <article class="single">
   <header>
-    {% if not ARTICLE_HIDE_TRANSLATION %}
-      {% import 'partial/translations.html' as translations with context %}
-      {{ translations.translations_for(article) }}
-    {% endif %}
-    <h1 id="{{ article.slug }}">{{ article.title }}</h1>
-    <p>
-      {{ _('Posted on %(when)s in %(category)s',
-           when=article.locale_date,
-           category='<a href="%s/%s">%s</a>'|format(SITEURL, article.category.url, article.category)|safe) }}
-
-      {% if 'post_stats' in PLUGINS %}
-        &#8226; {{ article.stats['read_mins'] }} min read
+    <div class="blog_max_width">
+      {% if not ARTICLE_HIDE_TRANSLATION %}
+        {% import 'partial/translations.html' as translations with context %}
+        {{ translations.translations_for(article) }}
       {% endif %}
+      <h1 id="{{ article.slug }}">{{ article.title }}</h1>
+      <p>
+        {{ _('Posted on %(when)s in %(category)s',
+            when=article.locale_date,
+            category='<a href="%s/%s">%s</a>'|format(SITEURL, article.category.url, article.category)|safe) }}
+
+        {% if 'post_stats' in PLUGINS %}
+          &#8226; {{ article.stats['read_mins'] }} min read
+        {% endif %}
     </p>
-  </header>
+    </div>
+</header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -43,7 +45,7 @@
     </script>
   {% endif %}
 
-  <div>
+  <div class="blog_max_width">
     {{ article.content }}
   </div>
   <div class="tag-cloud">
